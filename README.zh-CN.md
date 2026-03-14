@@ -55,7 +55,7 @@ npm install -g @jackwener/opencli@latest
 ## 📋 前置要求
 
 浏览器命令需要：
-1. **Chrome** 浏览器正在运行，且已登录目标网站
+1. **Chrome** 浏览器正在运行，且**已登录目标网站**（如 bilibili.com、zhihu.com、xiaohongshu.com）
 2. 安装 **[Playwright MCP Bridge](https://chromewebstore.google.com/detail/playwright-mcp-bridge/mmlmfjhmonkocbjadbfplnigmagldckm)** 扩展
 3. 配置 `PLAYWRIGHT_MCP_EXTENSION_TOKEN`（从扩展设置页获取），设为环境变量或写入 MCP 配置：
 
@@ -74,6 +74,8 @@ npm install -g @jackwener/opencli@latest
 ```
 
 公共 API 命令（`hackernews`、`github search`、`v2ex`）无需浏览器。
+
+> **⚠️ 重要**：浏览器命令复用你的 Chrome 登录状态。运行命令前，你必须已在 Chrome 中登录目标网站。如果获取到空数据或报错，请先检查登录状态。
 
 ## 📦 内置命令
 

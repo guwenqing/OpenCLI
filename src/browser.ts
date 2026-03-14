@@ -199,19 +199,19 @@ export class PlaywrightMCP {
 
   async close(): Promise<void> {
     try {
-      // Close extension tab(s) opened during this session
+      // Close tabs opened during this session (site tabs + extension tabs)
       if (this._page && this._proc && !this._proc.killed) {
         try {
           const tabs = await this._page.tabs();
           const tabStr = typeof tabs === 'string' ? tabs : JSON.stringify(tabs);
-          // Find and close chrome-extension:// tabs (opened by MCP Bridge)
-          const tabMatches = tabStr.match(/Tab (\d+).*?chrome-extension:\/\//g);
-          if (tabMatches) {
-            for (const match of tabMatches) {
-              const idx = match.match(/Tab (\d+)/)?.[1];
-              if (idx) {
-                try { await this._page.closeTab(parseInt(idx)); } catch {}
-              }
+          const allTabs = tabStr.match(/Tab (\d+)/g) || [];
+          const currentTabCount = allTabs.length;
+
+          // Close tabs in reverse order to avoid index shifting issues
+          // Keep the original tabs that existed before the command started
+          if (currentTabCount > this._initialTabCount && this._initialTabCount > 0) {
+            for (let i = currentTabCount - 1; i >= this._initialTabCount; i--) {
+              try { await this._page.closeTab(i); } catch {}
             }
           }
         } catch {}

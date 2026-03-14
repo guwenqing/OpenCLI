@@ -55,7 +55,7 @@ npm install -g @jackwener/opencli@latest
 ## 📋 Prerequisites
 
 Browser commands need:
-1. **Chrome** running with the target site logged in
+1. **Chrome** running **and logged into the target site** (e.g. bilibili.com, zhihu.com, xiaohongshu.com)
 2. **[Playwright MCP Bridge](https://chromewebstore.google.com/detail/playwright-mcp-bridge/mmlmfjhmonkocbjadbfplnigmagldckm)** extension installed
 3. Configure `PLAYWRIGHT_MCP_EXTENSION_TOKEN` (from the extension settings page) as an environment variable, or in your MCP config:
 
@@ -74,6 +74,8 @@ Browser commands need:
 ```
 
 Public API commands (`hackernews`, `github search`, `v2ex`) need no browser at all.
+
+> **⚠️ Important**: Browser commands reuse your Chrome login session. You must be logged into the target website in Chrome before running commands. If you get empty data or errors, check your login status first.
 
 ## 📦 Built-in Commands
 
