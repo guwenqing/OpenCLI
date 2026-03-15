@@ -57,7 +57,7 @@ npm install -g @jackwener/opencli@latest
 浏览器命令需要：
 1. **Chrome** 浏览器正在运行，且**已登录目标网站**（如 bilibili.com、zhihu.com、xiaohongshu.com）
 2. 安装 **[Playwright MCP Bridge](https://chromewebstore.google.com/detail/playwright-mcp-bridge/mmlmfjhmonkocbjadbfplnigmagldckm)** 扩展
-3. 配置 `PLAYWRIGHT_MCP_EXTENSION_TOKEN`（从扩展设置页获取），设为环境变量或写入 MCP 配置：
+3. 在 MCP 配置中设置 `PLAYWRIGHT_MCP_EXTENSION_TOKEN`（从扩展设置页获取）：
 
 ```json
 {
@@ -83,7 +83,7 @@ npm install -g @jackwener/opencli@latest
 |------|------|------|
 | **bilibili** | `hot` `search` `me` `favorite` `history` `feed` `user-videos` | 🔐 浏览器 |
 | **zhihu** | `hot` `search` `question` | 🔐 浏览器 |
-| **xiaohongshu** | `search` `me` `notifications` `feed` | 🔐 浏览器 |
+| **xiaohongshu** | `search` `notifications` `feed` | 🔐 浏览器 |
 | **twitter** | `trending` | 🔐 浏览器 |
 | **reddit** | `hot` | 🔐 浏览器 |
 | **github** | `trending` `search` | 🔐 / 🌐 |

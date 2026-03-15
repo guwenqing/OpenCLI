@@ -20,4 +20,3 @@ import './zhihu/question.js';
 
 // xiaohongshu
 import './xiaohongshu/search.js';
-import './xiaohongshu/me.js';

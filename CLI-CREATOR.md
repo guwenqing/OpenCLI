@@ -571,6 +571,9 @@ git push
 | 搜索参数被 URL 编码 | `${{ args.keyword }}` 被浏览器二次编码 | 在 evaluate 内用 `encodeURIComponent()` 手动编码 |
 | Cookie 过期 | 返回 401 / 空数据 | 在浏览器里重新登录目标站点 |
 | Extension tab 残留 | Chrome 多出 `chrome-extension://` tab | 已自动清理；若残留，手动关闭即可 |
+| TS evaluate 格式 | `() => {}` 报 `result is not a function` | TS 中 `page.evaluate()` 必须用 IIFE：`(async () => { ... })()` |
+| 页面异步加载 | evaluate 拿到空数据（store state 还没更新） | 在 evaluate 内用 polling 等待数据出现，或增加 `wait` 时间 |
+| YAML 内嵌大段 JS | 调试困难，字符串转义问题 | 超过 10 行 JS 的命令改用 TS adapter |
 
 ---
 

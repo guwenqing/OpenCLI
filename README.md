@@ -57,7 +57,7 @@ npm install -g @jackwener/opencli@latest
 Browser commands need:
 1. **Chrome** running **and logged into the target site** (e.g. bilibili.com, zhihu.com, xiaohongshu.com)
 2. **[Playwright MCP Bridge](https://chromewebstore.google.com/detail/playwright-mcp-bridge/mmlmfjhmonkocbjadbfplnigmagldckm)** extension installed
-3. Configure `PLAYWRIGHT_MCP_EXTENSION_TOKEN` (from the extension settings page) as an environment variable, or in your MCP config:
+3. Configure `PLAYWRIGHT_MCP_EXTENSION_TOKEN` (from the extension settings page) in your MCP config:
 
 ```json
 {
@@ -83,7 +83,7 @@ Public API commands (`hackernews`, `github search`, `v2ex`) need no browser at a
 |------|----------|------|
 | **bilibili** | `hot` `search` `me` `favorite` `history` `feed` `user-videos` | 🔐 Browser |
 | **zhihu** | `hot` `search` `question` | 🔐 Browser |
-| **xiaohongshu** | `search` `me` `notifications` `feed` | 🔐 Browser |
+| **xiaohongshu** | `search` `notifications` `feed` | 🔐 Browser |
 | **twitter** | `trending` | 🔐 Browser |
 | **reddit** | `hot` | 🔐 Browser |
 | **github** | `trending` `search` | 🔐 / 🌐 |

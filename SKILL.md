@@ -30,7 +30,7 @@ npm update -g @jackwener/opencli
 Browser commands require:
 1. Chrome browser running **(logged into target sites)**
 2. [Playwright MCP Bridge](https://chromewebstore.google.com/detail/playwright-mcp-bridge/mmlmfjhmonkocbjadbfplnigmagldckm) extension
-3. Configure `PLAYWRIGHT_MCP_EXTENSION_TOKEN` env var (from extension settings) or in MCP config
+3. Configure `PLAYWRIGHT_MCP_EXTENSION_TOKEN` (from extension settings) in your MCP config
 
 > **Note**: You must be logged into the target website in Chrome before running commands. Tabs opened during command execution are auto-closed afterwards.
 
@@ -57,7 +57,6 @@ opencli zhihu question --id 34816524     # 问题详情和回答
 
 # 小红书 (browser)
 opencli xiaohongshu search --keyword "美食"  # 搜索笔记
-opencli xiaohongshu me                        # 我的信息
 opencli xiaohongshu notifications             # 通知（mentions/likes/connections）
 opencli xiaohongshu feed --limit 10           # 推荐 Feed
 
