@@ -13,7 +13,7 @@ cli({
   strategy: Strategy.COOKIE,
   args: [
     { name: 'symbol', required: true, help: 'Stock ticker (e.g. AAPL)' },
-    { name: 'expiration', type: 'str', help: 'Expiration date (YYYY-MM-DD). Defaults to nearest.' },
+    { name: 'expiration', type: 'str', help: 'Expiration date (YYYY-MM-DD). Defaults to the nearest available expiration.' },
     { name: 'limit', type: 'int', default: 10, help: 'Number of near-the-money strikes per type' },
   ],
   columns: [
@@ -49,7 +49,25 @@ cli({
           const resp = await fetch(url, { credentials: 'include', headers });
           if (resp.ok) {
             const d = await resp.json();
-            const items = d?.data || [];
+            let items = d?.data || [];
+
+            if (!expDate) {
+              const expirations = items
+                .map(i => (i.raw || i).expirationDate || null)
+                .filter(Boolean)
+                .sort((a, b) => {
+                  const aTime = Date.parse(a);
+                  const bTime = Date.parse(b);
+                  if (Number.isNaN(aTime) && Number.isNaN(bTime)) return 0;
+                  if (Number.isNaN(aTime)) return 1;
+                  if (Number.isNaN(bTime)) return -1;
+                  return aTime - bTime;
+                });
+              const nearestExpiration = expirations[0];
+              if (nearestExpiration) {
+                items = items.filter(i => ((i.raw || i).expirationDate || null) === nearestExpiration);
+              }
+            }
 
             // Separate calls and puts, sort by distance from current price
             const calls = items

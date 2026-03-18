@@ -38,51 +38,43 @@ cli({
           'lastPrice','volume','openInterest','volumeOpenInterestRatio','volatility',
         ].join(',');
 
-        // Try unusual_activity list first, fall back to mostActive
         // Fetch extra rows when filtering by type since server-side filter may not work
         const fetchLimit = typeFilter !== 'all' ? limit * 3 : limit;
-        const lists = [
-          'options.unusual_activity.stocks.us',
-          'options.mostActive.us',
-        ];
+        try {
+          const url = '/proxies/core-api/v1/options/get?list=options.unusual_activity.stocks.us'
+            + '&fields=' + fields
+            + '&orderBy=volumeOpenInterestRatio&orderDir=desc'
+            + '&raw=1&limit=' + fetchLimit;
 
-        for (const list of lists) {
-          try {
-            const url = '/proxies/core-api/v1/options/get?list=' + list
-              + '&fields=' + fields
-              + '&orderBy=volumeOpenInterestRatio&orderDir=desc'
-              + '&raw=1&limit=' + fetchLimit;
-
-            const resp = await fetch(url, { credentials: 'include', headers });
-            if (resp.ok) {
-              const d = await resp.json();
-              let items = d?.data || [];
-              if (items.length > 0) {
-                // Apply client-side type filter
-                if (typeFilter !== 'all') {
-                  items = items.filter(i => {
-                    const t = ((i.raw || i).optionType || '').toLowerCase();
-                    return t === typeFilter;
-                  });
-                }
-                return items.slice(0, limit).map(i => {
-                  const r = i.raw || i;
-                  return {
-                    symbol: r.baseSymbol || r.symbol,
-                    type: r.optionType,
-                    strike: r.strikePrice,
-                    expiration: r.expirationDate,
-                    last: r.lastPrice,
-                    volume: r.volume,
-                    openInterest: r.openInterest,
-                    volOiRatio: r.volumeOpenInterestRatio,
-                    iv: r.volatility,
-                  };
+          const resp = await fetch(url, { credentials: 'include', headers });
+          if (resp.ok) {
+            const d = await resp.json();
+            let items = d?.data || [];
+            if (items.length > 0) {
+              // Apply client-side type filter
+              if (typeFilter !== 'all') {
+                items = items.filter(i => {
+                  const t = ((i.raw || i).optionType || '').toLowerCase();
+                  return t === typeFilter;
                 });
               }
+              return items.slice(0, limit).map(i => {
+                const r = i.raw || i;
+                return {
+                  symbol: r.baseSymbol || r.symbol,
+                  type: r.optionType,
+                  strike: r.strikePrice,
+                  expiration: r.expirationDate,
+                  last: r.lastPrice,
+                  volume: r.volume,
+                  openInterest: r.openInterest,
+                  volOiRatio: r.volumeOpenInterestRatio,
+                  iv: r.volatility,
+                };
+              });
             }
-          } catch(e) {}
-        }
+          }
+        } catch(e) {}
 
         // Fallback: parse from DOM table
         try {
