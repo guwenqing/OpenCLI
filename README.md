@@ -22,6 +22,7 @@ Turn ANY Electron application into a CLI tool! Recombine, script, and extend app
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Built-in Commands](#built-in-commands)
+  - [Desktop App Adapters](#desktop-app-adapters)
 - [Download Support](#download-support)
 - [Output Formats](#output-formats)
 - [For AI Agents (Developer Guide)](#for-ai-agents-developer-guide)
@@ -134,6 +135,23 @@ Run `opencli list` for the live registry.
 | **smzdm** | `search` | 🔐 Browser |
 | **weibo** | `hot` | 🔐 Browser |
 | **yahoo-finance** | `quote` | 🔐 Browser |
+
+### Desktop App Adapters
+
+Each desktop adapter has its own detailed documentation with commands reference, setup guide, and examples:
+
+| App | Description | Doc |
+|-----|-------------|-----|
+| **Cursor** | Control Cursor IDE — Composer, chat, code extraction | [README](./src/clis/cursor/README.md) |
+| **Codex** | Drive OpenAI Codex CLI agent headlessly | [README](./src/clis/codex/README.md) |
+| **Antigravity** | Control Antigravity Ultra from terminal | [README](./src/clis/antigravity/README.md) |
+| **ChatGPT** | Automate ChatGPT macOS desktop app | [README](./src/clis/chatgpt/README.md) |
+| **ChatWise** | Multi-LLM client (GPT-4, Claude, Gemini) | [README](./src/clis/chatwise/README.md) |
+| **Notion** | Search, read, write Notion pages | [README](./src/clis/notion/README.md) |
+| **Discord** | Discord Desktop — messages, channels, servers | [README](./src/clis/discord-app/README.md) |
+| **Feishu** | 飞书/Lark Desktop via AppleScript | [README](./src/clis/feishu/README.md) |
+| **WeChat** | 微信 Desktop via AppleScript + Accessibility | [README](./src/clis/wechat/README.md) |
+| **NeteaseMusic** | 网易云音乐 Desktop via CEF/CDP | [README](./src/clis/neteasemusic/README.md) |
 
 ## Download Support
 
